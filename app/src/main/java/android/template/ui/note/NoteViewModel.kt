@@ -46,6 +46,13 @@ class NoteViewModel @Inject constructor(
             noteRepository.add(name)
         }
     }
+
+    /** Sync notes from remote API into local DB (official pattern: refresh from network). */
+    fun refresh() {
+        viewModelScope.launch {
+            noteRepository.refreshFromApi()
+        }
+    }
 }
 
 sealed interface NoteUiState {

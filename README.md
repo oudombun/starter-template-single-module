@@ -6,8 +6,8 @@ This template is compatible with the latest **stable** version of Android Studio
 
 ## Features
 
-* Room Database
-* Hilt
+* Room Database + Retrofit
+* Hilt 
 * ViewModel, read+write
 * UI in Views (XML layouts, ViewBinding, Fragment, Material Components)
 * Navigation (Navigation Component with Fragment)

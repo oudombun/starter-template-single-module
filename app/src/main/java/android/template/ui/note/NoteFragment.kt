@@ -64,6 +64,11 @@ class NoteFragment : Fragment() {
             }
         }
 
+        binding.buttonSync.setOnClickListener { viewModel.refresh() }
+
+        // Optional: sync from API once when screen loads
+        viewModel.refresh()
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collectLatest { state ->
