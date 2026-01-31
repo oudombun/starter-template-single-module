@@ -24,7 +24,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import android.template.data.local.database.AppDatabase
-import android.template.data.local.database.MyModelDao
+import android.template.data.local.database.NoteDao
 import javax.inject.Singleton
 
 
@@ -32,8 +32,8 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class DatabaseModule {
     @Provides
-    fun provideMyModelDao(appDatabase: AppDatabase): MyModelDao {
-        return appDatabase.myModelDao()
+    fun provideNoteDao(appDatabase: AppDatabase): NoteDao {
+        return appDatabase.noteDao()
     }
 
     @Provides
@@ -42,7 +42,9 @@ class DatabaseModule {
         return Room.databaseBuilder(
             appContext,
             AppDatabase::class.java,
-            "MyModel"
-        ).build()
+            "notes"
+        )
+            .fallbackToDestructiveMigration()
+            .build()
     }
 }

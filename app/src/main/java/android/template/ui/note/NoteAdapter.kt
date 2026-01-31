@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package android.template.ui.mymodel
+package android.template.ui.note
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -22,12 +22,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import android.template.R
-import android.template.databinding.ItemMyModelBinding
+import android.template.databinding.ItemNoteBinding
 
-class MyModelAdapter : ListAdapter<String, MyModelAdapter.ViewHolder>(DiffCallback()) {
+class NoteAdapter : ListAdapter<String, NoteAdapter.ViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemMyModelBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemNoteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -35,9 +35,9 @@ class MyModelAdapter : ListAdapter<String, MyModelAdapter.ViewHolder>(DiffCallba
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(private val binding: ItemMyModelBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: String) {
-            binding.itemText.text = binding.root.context.getString(R.string.saved_item, item)
+    class ViewHolder(private val binding: ItemNoteBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(note: String) {
+            binding.itemText.text = binding.root.context.getString(R.string.saved_note, note)
         }
     }
 

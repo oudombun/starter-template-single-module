@@ -20,8 +20,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import android.template.data.MyModelRepository
-import android.template.data.DefaultMyModelRepository
+import android.template.data.NoteRepository
+import android.template.data.DefaultNoteRepository
 import javax.inject.Singleton
 
 @Module
@@ -30,7 +30,7 @@ interface DataModule {
 
     @Singleton
     @Binds
-    fun bindsMyModelRepository(
-        myModelRepository: DefaultMyModelRepository
-    ): MyModelRepository
+    fun bindsNoteRepository(
+        noteRepository: DefaultNoteRepository
+    ): NoteRepository
 }

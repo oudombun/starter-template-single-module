@@ -15,8 +15,8 @@
   -->
 
 <resources>
-    <string name="app_name">MyApplication</string>
-    <string name="hint_my_model">Name</string>
+    <string name="app_name">Notes</string>
+    <string name="hint_note">Note</string>
     <string name="save">Save</string>
-    <string name="saved_item">Saved item: %s</string>
+    <string name="saved_note">Note: %s</string>
 </resources>

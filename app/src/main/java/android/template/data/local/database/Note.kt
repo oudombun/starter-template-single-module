@@ -23,8 +23,8 @@ import androidx.room.PrimaryKey
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
-@Entity
-data class MyModel(
+@Entity(tableName = "note")
+data class Note(
     val name: String
 ) {
     @PrimaryKey(autoGenerate = true)
@@ -32,10 +32,10 @@ data class MyModel(
 }
 
 @Dao
-interface MyModelDao {
-    @Query("SELECT * FROM mymodel ORDER BY uid DESC LIMIT 10")
-    fun getMyModels(): Flow<List<MyModel>>
+interface NoteDao {
+    @Query("SELECT * FROM note ORDER BY uid DESC LIMIT 10")
+    fun getNotes(): Flow<List<Note>>
 
     @Insert
-    suspend fun insertMyModel(item: MyModel)
+    suspend fun insertNote(note: Note)
 }

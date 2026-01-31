@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package android.template.ui.mymodel
+package android.template.ui.note
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -23,43 +23,43 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import android.template.databinding.FragmentMyModelBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import android.template.databinding.FragmentNoteBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MyModelFragment : Fragment() {
+class NoteFragment : Fragment() {
 
-    private var _binding: FragmentMyModelBinding? = null
+    private var _binding: FragmentNoteBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: MyModelViewModel by viewModels()
+    private val viewModel: NoteViewModel by viewModels()
 
-    private lateinit var adapter: MyModelAdapter
+    private lateinit var adapter: NoteAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMyModelBinding.inflate(inflater, container, false)
+        _binding = FragmentNoteBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = MyModelAdapter()
-        binding.recyclerMyModels.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerMyModels.adapter = adapter
+        adapter = NoteAdapter()
+        binding.recyclerNotes.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerNotes.adapter = adapter
 
         binding.buttonSave.setOnClickListener {
             val name = binding.inputName.text?.toString()?.trim()
             if (!name.isNullOrEmpty()) {
-                viewModel.addMyModel(name)
+                viewModel.addNote(name)
                 binding.inputName.text?.clear()
             }
         }
@@ -68,9 +68,9 @@ class MyModelFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collectLatest { state ->
                     when (state) {
-                        is MyModelUiState.Loading -> { /* show loading if needed */ }
-                        is MyModelUiState.Error -> { /* show error if needed */ }
-                        is MyModelUiState.Success -> adapter.submitList(state.data)
+                        is NoteUiState.Loading -> { /* show loading if needed */ }
+                        is NoteUiState.Error -> { /* show error if needed */ }
+                        is NoteUiState.Success -> adapter.submitList(state.data)
                     }
                 }
             }

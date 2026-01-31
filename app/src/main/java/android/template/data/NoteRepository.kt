@@ -18,24 +18,24 @@ package android.template.data
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import android.template.data.local.database.MyModel
-import android.template.data.local.database.MyModelDao
+import android.template.data.local.database.Note
+import android.template.data.local.database.NoteDao
 import javax.inject.Inject
 
-interface MyModelRepository {
-    val myModels: Flow<List<String>>
+interface NoteRepository {
+    val notes: Flow<List<String>>
 
     suspend fun add(name: String)
 }
 
-class DefaultMyModelRepository @Inject constructor(
-    private val myModelDao: MyModelDao
-) : MyModelRepository {
+class DefaultNoteRepository @Inject constructor(
+    private val noteDao: NoteDao
+) : NoteRepository {
 
-    override val myModels: Flow<List<String>> =
-        myModelDao.getMyModels().map { items -> items.map { it.name } }
+    override val notes: Flow<List<String>> =
+        noteDao.getNotes().map { items -> items.map { it.name } }
 
     override suspend fun add(name: String) {
-        myModelDao.insertMyModel(MyModel(name = name))
+        noteDao.insertNote(Note(name = name))
     }
 }
